@@ -69,18 +69,14 @@ const displayTeachers = (teachers) => {
         teachers.forEach((teacher) => {
             const div = document.createElement("div");
             div.classList.add("teacher-card");
+            const specializationButtons = Array.isArray(teacher.specialization)
+            ? teacher.specialization.map(item => `<button>${item}</button>`).join("")
+            : "";
             div.innerHTML = `
                 <img class="teacher-img" src="${teacher.image}" alt="">
                 <h4>${teacher?.user}</h4>
                 <h6>${teacher?.specialization}</h6>
-                <p>fdsdff</p>
-                <p>
-                ${
-                    teacher?.specialization.map((item) => {
-                        return `<button>${item}</button>`;
-                    })
-                }
-                </p>
+                <p>${specializationButtons}</p>
                 <button><a target="_blank" href="tecDetails.html?teacherId=${teacher.id}">Details</a></button>
             `;
             parent.appendChild(div);
@@ -116,7 +112,7 @@ const handleSearch=()=>{
 
 
 const loadReview=()=>{
-    fetch("http://127.0.0.1:8000/tuition/reviews")
+    fetch("http://127.0.0.1:8000/tuition/reviews/")
         .then((res)=>res.json())
         .then((data)=>displayReview(data));
     

@@ -113,3 +113,41 @@ margin: auto;
     background-color: gray;
     color: white;
 }
+.user-details-container{
+    height: 100vh;
+    width: 70%;
+    margin: auto;
+}
+.user-img{
+    
+    width: 200px;
+    height: 200px;
+    border-radius:100px;
+    
+}
+.user-all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+.all-appointment-container{
+    width: 90%;
+    margin: auto;
+    height: 100vh;
+}
+.teacher{
+    width: 350px;
+    height: 400px;
+    box-shadow: 4px 4px 8px gray;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    border-radius: 10px;
+}
+.symtom{
+    width: 50%;
+    padding: 20px;
+    margin: 20px;
+    border: none;
+}

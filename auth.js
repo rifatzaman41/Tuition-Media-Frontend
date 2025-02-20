@@ -23,27 +23,51 @@ const handleRegistration = (event) => {
         document.getElementById("error").innerText = "";
 
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if (passwordRegex.test(password)) {
+        // const passwordRegex = /"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"/;
+        // if (passwordRegex.test(password)) {
             console.log(info);
-            fetch("http://127.0.0.1:8000/profile1/",{
+            fetch("http://127.0.0.1:8000/profile1/registers/",{
 method:"POST",
 headers:{"content-type":"application/json"},
-body:JSON.stringify(info),
+body:JSON.stringify(info)
             })
             .then(res=>res.json())
             .then((data)=>console.log(data));
         } else {
             document.getElementById("error").innerText =
-                "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.";
+                "Password must be at least 8 characters long, at least one letter,one number, and one special character.";
         }
-    } else {
-        document.getElementById("error").innerText = "Passwords do not match.";
-        alert("Passwords do not match.");
-    }
+    // } else {
+    //     document.getElementById("error").innerText = "Passwords do not match.";
+    //     alert("Passwords do not match.");
+    // }
 };
 
 const getValue = (id) => {
     return document.getElementById(id).value;
 };
 
+const handleLogin=(event)=>{
+    event.preventDefault();
+    const username=getValue("login-username");
+    const password=getValue("login-password");
+    console.log({username,password})
+    if((username,password)){
+    fetch("http://127.0.0.1:8000/profile1/logins/",{
+        method:"POST",
+        headers:{"content-type":"application/json"},
+        body:JSON.stringify({username,password}),
+    })
+    .then((res)=>res.json())
+    .then((data)=>{
+        console.log(data);
+        
+        if(data.token && data.student_id){
+         
+            localStorage.setItem("token",data.token);
+            localStorage.setItem("user_id",data.student_id);
+            window.location.href="index.html";
+        }
+    });
+}
+};
